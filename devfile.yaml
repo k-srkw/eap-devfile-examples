@@ -4,7 +4,7 @@ metadata:
   version: 1.0.0
   displayName: JBoss EAP 8
   description: Java stack with EAP 8, OpenJDK 17 and Maven 3.9
-  tags: ["RHEL8", "Java", "OpenJDK", "Maven", "EAP"]
+  tags: ["RHEL9", "Java", "OpenJDK", "Maven", "EAP"]
   icon: https://raw.githubusercontent.com/redhat-developer/devfile-registry/main/icons/type-jboss.svg
   projectType: "JBoss EAP"
   language: "java"
