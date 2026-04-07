@@ -101,7 +101,7 @@ commands:
         isDefault: true
   - id: shutdown
     exec:
-      label: "04 - Shutdown the server."
+      label: "InnerLoop 04 - Shutdown the server."
       component: tools
       commandLine: ./target/server/bin/jboss-cli.sh -c --command=shutdown
       workingDir: ${PROJECT_SOURCE}
