@@ -114,7 +114,7 @@ commands:
       label: "OuterLoop 01 - Deploy Image to OpenShift"
       component: tools
       workingDir: ${PROJECT_SOURCE}
-      commandLine: "helm repo add jboss https://jbossas.github.io/eap-charts/ && helm install ${IMAGE} --namespace=${IMAGE_REGISTRY_NAMESPACE} -f ./charts/helm.yaml jboss/eap8"
+      commandLine: "helm repo add jboss https://jbossas.github.io/eap-charts/ && helm install ${IMAGE} --namespace=${IMAGE_REGISTRY_NAMESPACE} -f ./.charts/helm.yaml jboss/eap8"
       group:
         kind: run
         isDefault: false
