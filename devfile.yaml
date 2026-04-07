@@ -74,7 +74,7 @@ components:
 commands:
   - id: package
     exec:
-      label: "01 - Build the application."
+      label: "InnerLoop 01 - Build the application."
       component: tools
       commandLine: mvn clean verify -Dmaven.wagon.http.ssl.insecure=true
       workingDir: ${PROJECT_SOURCE}
@@ -83,7 +83,7 @@ commands:
         isDefault: true
   - id: run
     exec:
-      label: "02 - Run the application in dev mode."
+      label: "InnerLoop 02 - Run the application in dev mode."
       component: tools
       commandLine: ./target/server/bin/standalone.sh -Djboss.host.name=${NODE_NAME} 
       workingDir: ${PROJECT_SOURCE}
@@ -92,7 +92,7 @@ commands:
         isDefault: true
   - id: debug
     exec:
-      label: "03 - Debug the application in dev mode."
+      label: "InnerLoop 03 - Debug the application in dev mode."
       component: tools
       commandLine: ./target/server/bin/standalone.sh -Djboss.host.name=${NODE_NAME} --debug 
       workingDir: ${PROJECT_SOURCE}
@@ -106,6 +106,24 @@ commands:
       commandLine: ./target/server/bin/jboss-cli.sh -c --command=shutdown
       workingDir: ${PROJECT_SOURCE}
       hotReloadCapable: false
+      group:
+        kind: run
+        isDefault: false
+  - id: deploy-image
+    exec:
+      label: "OuterLoop 01 - Deploy Image to OpenShift"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}
+      commandLine: "helm repo add jboss https://jbossas.github.io/eap-charts/ && helm install ${IMAGE} --namespace=${IMAGE_REGISTRY_NAMESPACE} -f ./charts/helm.yaml jboss/eap8"
+      group:
+        kind: run
+        isDefault: false
+  - id: undeploy-image
+    exec:
+      label: "OuterLoop 02 - Undeploy Image from OpenShift"
+      component: tools
+      workingDir: ${PROJECT_SOURCE}/helloworld
+      commandLine: "helm uninstall ${IMAGE}"
       group:
         kind: run
         isDefault: false
